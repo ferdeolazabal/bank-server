@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === "development") {
     synchronize: true,
     migrationsRun: false,
     logging: false,
-    entities: ["src/Infrastructure/Schema/*.ts"],
+    entities: [PaymentsSchema, UserSchema],
   });
 }
 if (process.env.NODE_ENV === "production") {
@@ -39,6 +39,6 @@ if (process.env.NODE_ENV === "production") {
     synchronize: true,
     migrationsRun: false,
     logging: false,
-    entities: ["src/Infrastructure/Schema/*.ts"],
+    entities: [PaymentsSchema, UserSchema],
   });
 }
