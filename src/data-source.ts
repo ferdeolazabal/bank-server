@@ -34,7 +34,7 @@ if (process.env.NODE_ENV === "production") {
     database: process.env.DB_NAME,
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    dropSchema: false,
+    dropSchema: true,
     synchronize: true,
     migrationsRun: false,
     logging: false,
