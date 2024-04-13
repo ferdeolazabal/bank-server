@@ -12,7 +12,7 @@
     "build:watch": "tsc --build tsconfig.json --watch",
     "dev": "nodemon --nolazy -L \"src\" -e ts,ejs --exec yarn dev:start",
     "dev:start": "npm-run-all build start",
-    "build": "npm-run-all tsc start:prod",
+    "build": "npm-run-all clean tsc start:prod",
     "start": "ts-node -P tsconfig.json app.ts",
     "start:prod": "node dist/app.js",
     "typeorm": "typeorm-ts-node-esm"
