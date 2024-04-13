@@ -87,11 +87,12 @@ const downloadCsvPayments = async (req: Request, res: Response) => {
       relations: ["user"],
     });
     const payments = savedPayments.map((pay) => Payment.fromValues(pay));
-
-    const paymentsToDownload = payments.map((data) => {
+    console.log("payments", payments);
+    const paymentsToDownload = payments.map((data: Payment) => {
+      console.log("data", data);
       return {
-        Nombre_de_usuario: data?.getUser()?.getFullName() || "-",
-        Email: data?.getUser()?.getEmail() || "-",
+        Nombre_de_usuario: data?.user?.getFullName() || "-",
+        Email: data?.user?.getEmail() || "-",
         Forma_de_pago: typeEnum[data.type],
         Fecha_de_pago: new Date(data.getCreatedAt()).toLocaleDateString(
           "es-AR"
