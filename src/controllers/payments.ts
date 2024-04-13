@@ -86,13 +86,9 @@ const downloadCsvPayments = async (req: Request, res: Response) => {
     const savedPayments = await AppDataSource.manager.find(Payment, {
       relations: ["user"],
     });
+    const payments = savedPayments.map((pay) => Payment.fromValues(pay));
 
-    const paymentsToDownload = savedPayments.map((data) => {
-      console.log("data", data);
-      console.log(
-        "data?.getUser()?.getFullName()",
-        data?.getUser()?.getFullName()
-      );
+    const paymentsToDownload = payments.map((data) => {
       return {
         Nombre_de_usuario: data?.getUser()?.getFullName() || "-",
         Email: data?.getUser()?.getEmail() || "-",
