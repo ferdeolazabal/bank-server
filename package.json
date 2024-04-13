@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "bank-payment-api",
   "main": "app.ts",
+  "type": "module",
   "scripts": {
     "clean": "rimraf dist/* --glob",
     "tsc": "tsc",
