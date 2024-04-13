@@ -46,7 +46,7 @@ const PaymentsSchema = new EntitySchema<Payment>({
     user: {
       type: "many-to-one",
       target: "User",
-      eager: false,
+      eager: true,
       joinColumn: {
         name: "userId",
         referencedColumnName: "_id",
