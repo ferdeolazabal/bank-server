@@ -88,11 +88,18 @@ const downloadCsvPayments = async (req: Request, res: Response) => {
     });
 
     const paymentsToDownload = savedPayments.map((data) => {
+      console.log("data", data);
+      console.log(
+        "data?.getUser()?.getFullName()",
+        data?.getUser()?.getFullName()
+      );
       return {
-        Nombre_de_usuario: data.user?.getFullName() || "-",
-        Email: data.user?.getEmail() || "-",
+        Nombre_de_usuario: data?.getUser()?.getFullName() || "-",
+        Email: data?.getUser()?.getEmail() || "-",
         Forma_de_pago: typeEnum[data.type],
-        Fecha_de_pago: new Date(data.getCreatedAt()).toLocaleDateString(),
+        Fecha_de_pago: new Date(data.getCreatedAt()).toLocaleDateString(
+          "es-AR"
+        ),
         Estado: statusEnum[data.getStatus()],
         Monto: `$ ${data.getAmount()}`,
         Receptor: data.getReceiver(),
