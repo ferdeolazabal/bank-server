@@ -66,11 +66,16 @@ const postPayment = async (req: Request, res: Response) => {
     });
 
     const savedPayment = await AppDataSource.manager.save(payment);
-    const newPayment = Payment.fromValues(savedPayment);
+
+    const getPayment = await AppDataSource.manager.findOne(Payment, {
+      relations: ["user"],
+      where: { _id: savedPayment._id },
+    });
+    const newPay = Payment.fromValues(getPayment);
 
     res.json({
       ok: true,
-      payment: newPayment,
+      payment: newPay,
     });
   } catch (e) {
     res.status(500).json({
@@ -87,9 +92,8 @@ const downloadCsvPayments = async (req: Request, res: Response) => {
       relations: ["user"],
     });
     const payments = savedPayments.map((pay) => Payment.fromValues(pay));
-    console.log("payments", payments);
+
     const paymentsToDownload = payments.map((data: Payment) => {
-      console.log("data", data);
       return {
         Nombre_de_usuario: data?.user?.getFullName() || "-",
         Email: data?.user?.getEmail() || "-",
